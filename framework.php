@@ -23,12 +23,14 @@ $dbname = "name for your DB";
 
 // If you want to fix an issue, open the script on github.
 $currentframever = file_get_contents("https://raw.githubusercontent.com/TermOfficial/Term-Framework/main/framework-true.php");
-function checkver(){
-  if("b1010" != $currentframever){
+function checkver($ver){
+  if($ver != $currentframever){
     echo "<script>console.warn(Term-Framework is out of date. Update the script here: https://github.com/TermOfficial/Term-Framework)</script>";
-  }
+  } else {
+    echo "<script>console.log(Update check pass [Term-Framework])</script>";
 }
 function test(){
   echo "test script executed.";
 }
+checkver("b1011");
 ?>
