@@ -1,5 +1,5 @@
 <?php
-// DO NOT USE THIS SCRIPT! Use framework.php.
+// DO NOT IMPLEMENT THIS SCRIPT! Use framework.php.
 function test(){
   echo "test script executed.";
 }
