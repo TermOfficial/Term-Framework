@@ -24,13 +24,13 @@ $dbname = "name for your DB";
 // If you want to fix an issue, open the script on github.
 function checkver($ver){
   if($ver != file_get_contents("https://raw.githubusercontent.com/TermOfficial/Term-Framework/main/framework-true.php")){
-    echo "<script>console.warn(Term-Framework is out of date. Update the script here: https://github.com/TermOfficial/Term-Framework ~Term-Framework~)</script>";
+    echo "<script>console.warn('Term-Framework is out of date. Update the script here: https://github.com/TermOfficial/Term-Framework ~Term-Framework~')</script>";
   } else {
-    echo "<script>console.log(Update check pass. ~Term-Framework~)</script>";
+    echo "<script>console.log('Update check pass. ~Term-Framework~')</script>";
 }
 }
 function test(){
   echo "test script executed.";
 }
-checkver("b1012");
+checkver("b1013");
 ?>
