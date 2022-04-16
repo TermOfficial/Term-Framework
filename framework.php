@@ -7,7 +7,7 @@ Although before you can use this, I'd like to say a few things.
 2. If you encounter a problem, try solving it yourself! If you solve it, make a pull request to make life easier for other developers! (and me. D:) If you can't solve it, create an issue. (https://github.com/TermOfficial/Term-Framework)
 3. Enjoy!
 
-This script uses MySQLi and CURL.
+This script uses MySQLi, CURL.
 If you don't have the following, the script won't function.
 
 In order to connect to your database, you can use your own script by specifying it in config, but it needs one requirement. The database must be connected to under $db.
@@ -22,7 +22,7 @@ $dbpass = "password to access your DB";
 $dbname = "name for your DB";
 // If you want to fix an issue, open the script on github.
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "put the raw github link here term");
+curl_setopt($ch, CURLOPT_URL, "https://raw.githubusercontent.com/TermOfficial/Term-Framework/main/framework-true.php");
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true)
 $framework = curl_exec($ch);
