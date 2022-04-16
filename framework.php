@@ -21,11 +21,6 @@ $dbuser = "username to access your DB";
 $dbpass = "password to access your DB";
 $dbname = "name for your DB";
 // If you want to fix an issue, open the script on github.
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "https://raw.githubusercontent.com/TermOfficial/Term-Framework/main/framework-true.php");
-curl_setopt($ch, CURLOPT_HEADER, 0);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$framework = curl_exec($ch);
-curl_close($ch);
+$framework = file_get_contents("https://raw.githubusercontent.com/TermOfficial/Term-Framework/main/framework-true.php");
 echo "<pre>$framework</pre>";
 ?>
