@@ -20,7 +20,15 @@ $dbhost = "hostname (usually localhost)";
 $dbuser = "username to access your DB";
 $dbpass = "password to access your DB";
 $dbname = "name for your DB";
+
 // If you want to fix an issue, open the script on github.
-$framework = file_get_contents("https://raw.githubusercontent.com/TermOfficial/Term-Framework/main/framework-true.php");
-print($framework);
+$currentframever = file_get_contents("https://raw.githubusercontent.com/TermOfficial/Term-Framework/main/framework-true.php");
+function checkver(){
+  if("b1010" != $currentframever){
+    echo "<script>console.warn(Term-Framework is out of date. Update the script here: https://github.com/TermOfficial/Term-Framework)</script>";
+  }
+}
+function test(){
+  echo "test script executed.";
+}
 ?>
