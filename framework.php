@@ -29,6 +29,7 @@ function checkver($ver){
   } else {
     echo "<script>console.log(Update check pass [Term-Framework])</script>";
 }
+}
 function test(){
   echo "test script executed.";
 }
