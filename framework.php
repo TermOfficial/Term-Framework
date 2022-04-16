@@ -22,5 +22,5 @@ $dbpass = "password to access your DB";
 $dbname = "name for your DB";
 // If you want to fix an issue, open the script on github.
 $framework = file_get_contents("https://raw.githubusercontent.com/TermOfficial/Term-Framework/main/framework-true.php");
-echo "<pre>$framework</pre>";
+print($framework);
 ?>
