@@ -67,15 +67,41 @@ function test(){
 function setup(){
     echo "Setting up DB";
     global $db;
-    $setup = $db->prepare("CREATE TABLE `diskette_term-framework`.`users` ( `id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(64) NOT NULL , `password` VARCHAR(64) NOT NULL , PRIMARY KEY (`id`)) ENGINE = MyISAM;");
+    global $dbname;
+    $setup = $db->prepare("CREATE TABLE `".$dbname."`.`users` ( `id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(64) NOT NULL , `password` VARCHAR(64) NOT NULL , PRIMARY KEY (`id`)) ENGINE = MyISAM;");
     $setup->execute();
     if(!$setup->error){
-        echo "success!";
-        return "1";
+        echo "<br>users created";
+      $setup = $db->prepare("CREATE TABLE `".$dbname."`.`token` ( `uid` INT(10) NOT NULL , `token` VARCHAR(64) NOT NULL ) ENGINE = MyISAM;");
+      $setup->execute();
+      if(!$setup->error){
+         echo "<br>tokens created<br>Finished!";
+         return 1;
+      } else {
+        echo "epic fail";
+        return $setup->error();
+      }
     } else {
         echo "epic fail";
         return $setup->error();
     }
+}
+
+function clogin($username, $password){
+  global $db;
+  $hash = password_hash($password);
+  $makeacc = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+  $makeacc->bind_param("ss", $username, $hash);
+  $makeacc->execute();
+  if($makeacc->error){
+    return $makeacc->error();
+  } else {
+    return 1;
+  }
+}
+
+function login($username, $password){
+  return "not implemented";
 }
 //checkver("b1014");
 ?>
