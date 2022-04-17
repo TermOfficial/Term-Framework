@@ -125,12 +125,14 @@ function login($username, $password){
             setcookie("token", $token, time()+99999);
             setcookie("id", $row["id"], time()+99999);
             setcookie("username", $row["username"], time()+99999);
+            return 1;
           } else {
             global $_SESSION;
             // I would put a don't give your cookies to anybody here, but guess what? You can't read PHP Session IDs! :DDD But seriously. don't give your cookies to anybody.
             $_SESSION["token"] = $token;
             $_SESSION["id"] = $row["id"];
             $_SESSION["username"] = $row["username"];
+            return 1;
           }
       } else {
         return $login->error();
@@ -142,5 +144,5 @@ function login($username, $password){
 function checktoken($username, $token){
   return "not implemented";
 }
-//checkver("b1022");
+//checkver("b1023");
 ?>
