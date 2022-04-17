@@ -17,6 +17,7 @@ If you want to use one of the functions, e.g:
 function login($username, $password){
   my login script would be here
 }
+
 Then use it like this:
 login("username", "password");
 and if it is a success, it will return 1. otherwise, it will return the error it ran into.
@@ -39,7 +40,7 @@ function checkver($ver){ // PLEASE FIX!
 }
 }
 
-if($connscript != NULL{
+if($connscript != NULL){
   require($connscript);
 } else {
   mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
