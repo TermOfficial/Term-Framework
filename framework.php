@@ -13,6 +13,11 @@ If you don't have the following, the script won't function.
 In order to connect to your database, you can use your own script by specifying it in config, but it needs one requirement. The database must be connected to under $db.
 If you don't want to use your own script, use the connector below.
 
+INSTALLATION:
+in every script, require the framework.
+Then, for the first time upon using the framework, run the function setup();
+This will then setup the database and create all files required.
+
 If you want to use one of the functions, e.g:
 function login($username, $password){
   my login script would be here
@@ -25,10 +30,10 @@ and if it is a success, it will return 1. otherwise, it will return the error it
 // Config
 $connscript = ""; // Replace the value with the location of your script.
 $usecookies = true; // Use cookies instead of PHP Session. No idea if this is more secure or not. Probably not, but if you want it enabled, go ahead.
-$dbhost = "hostname (usually localhost)";
-$dbuser = "username to access your DB";
-$dbpass = "password to access your DB";
-$dbname = "name for your DB";
+$dbhost = "localhost"; // the last few variables should be self-explanitory. This value is usually localhost.
+$dbuser = "";
+$dbpass = "";
+$dbname = "";
 
 // If you want to fix an issue, open the script on github.
 
@@ -40,17 +45,37 @@ function checkver($ver){ // PLEASE FIX!
 }
 }
 
+// connect to the db!
 if($connscript != NULL){
-  require($connscript);
+    require($connscript);
 } else {
-  mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-  if($usecookies = false){
-    session_start();
-  }
+    $db = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+    if($db->error){
+        exit("Connection failure.");
+    }
+    if($usecookies = false){
+        session_start();
+    }
 }
 
+// use this to test Term-Framework's functionality
 function test(){
   echo "Term-Framework test script.";
+}
+
+// use this only once!
+function setup(){
+    echo "Setting up DB";
+    global $db;
+    $setup = $db->prepare("CREATE TABLE `diskette_term-framework`.`users` ( `id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(64) NOT NULL , `password` VARCHAR(64) NOT NULL , PRIMARY KEY (`id`)) ENGINE = MyISAM;");
+    $setup->execute();
+    if(!$setup->error){
+        echo "success!";
+        return "1";
+    } else {
+        echo "epic fail";
+        return $setup->error();
+    }
 }
 //checkver("b1014");
 ?>
