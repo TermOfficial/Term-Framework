@@ -89,7 +89,7 @@ function setup(){
 
 function clogin($username, $password){
   global $db;
-  $hash = password_hash($password);
+  $hash = password_hash($password, PASSWORD_DEFAULT);
   $makeacc = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
   $makeacc->bind_param("ss", $username, $hash);
   $makeacc->execute();
