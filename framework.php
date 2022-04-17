@@ -12,27 +12,44 @@ If you don't have the following, the script won't function.
 
 In order to connect to your database, you can use your own script by specifying it in config, but it needs one requirement. The database must be connected to under $db.
 If you don't want to use your own script, use the connector below.
-This should be all for now.
+
+If you want to use one of the functions, e.g:
+function login($username, $password){
+  my login script would be here
+}
+Then use it like this:
+login("username", "password");
+and if it is a success, it will return 1. otherwise, it will return the error it ran into.
 */
 // Config
 $connscript = ""; // Replace the value with the location of your script.
+$usecookies = true; // Use cookies instead of PHP Session. No idea if this is more secure or not. Probably not, but if you want it enabled, go ahead.
 $dbhost = "hostname (usually localhost)";
 $dbuser = "username to access your DB";
 $dbpass = "password to access your DB";
 $dbname = "name for your DB";
 
 // If you want to fix an issue, open the script on github.
-/*
-function checkver(){
-  if('b1013' != file_get_contents("https://raw.githubusercontent.com/TermOfficial/Term-Framework/main/framework-true.php")){
+
+function checkver($ver){ // PLEASE FIX!
+  if($ver != file_get_contents("https://raw.githubusercontent.com/TermOfficial/Term-Framework/main/framework-true.php")){
     echo "<script>console.warn('Term-Framework is out of date. Update the script here: https://github.com/TermOfficial/Term-Framework ~Term-Framework~')</script>";
   } else {
     echo "<script>console.log('Update check pass. ~Term-Framework~')</script>";
 }
 }
-*/
-function test(){
-  echo "test script executed.";
+
+if($connscript != NULL{
+  require($connscript);
+} else {
+  mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+  if($usecookies = false){
+    session_start();
+  }
 }
-//checkver();
+
+function test(){
+  echo "Term-Framework test script.";
+}
+//checkver("b1014");
 ?>
