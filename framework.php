@@ -75,7 +75,8 @@ function setup(){
       $setup = $db->prepare("CREATE TABLE `".$dbname."`.`token` ( `uid` INT(10) NOT NULL , `token` VARCHAR(64) NOT NULL ) ENGINE = MyISAM;");
       $setup->execute();
       if(!$setup->error){
-         echo "<br>tokens created<br>Finished!";
+         echo "<br>tokens created";
+         $setup = $db->prepare("CREATE TABLE `".$dbname."`.`bans` ( `uid` INT(10) NOT NULL ) ENGINE = MyISAM;");
          return 1;
       } else {
         echo "epic fail";
@@ -101,7 +102,46 @@ function clogin($username, $password){
 }
 
 function login($username, $password){
+  global $usecookies;
+  global $db;
+  $login = $db->prepare("SELECT * FROM users WHERE username = ?");
+  $login->bind_param("s", $username);
+  $login->execute();
+  if(!mysqli_num_rows){
+    return "noaccount";
+  } else {
+    $result = $login->get_result();
+    $row = $result->fetch_assoc();
+    if($row["password"] != password_hash($password, PASSWORD_DEFAULT){
+      return "invalid password";
+    } else {
+      $token = "DO NOT SHARE YOUR COOKIES TO ANYBODY. value: ".bin2hex(openssl_random_pseudo_bytes(64));."";
+      $login = $db->prepare("INSERT INTO token (uid, token) VALUES (?, ?)");
+      $login->bind_param("is", $row["id"], $token);
+      $login->execute();
+      if(!$login->error){
+          if($usecookies){
+            global $_COOKIE;
+            setcookie("DO NOT GIVE YOUR COOKIES TO ANYBODY", "DO NOT GIVE YOUR COOKIES TO ANYBODY", time()+99999);
+            setcookie("token", $token, time()+99999);
+            setcookie("id", $row["id"], time()+99999);
+            setcookie("username" $row["username"], time()+99999);
+          } else {
+            global $_SESSION;
+            // I would put a don't give your cookies to anybody here, but guess what? You can't read PHP Session IDs! :DDD But seriously. don't give your cookies to anybody.
+            $_SESSION["token"] = $token;
+            $_SESSION["id"] = $row["id"];
+            $_SESSION["username"] = $row["username"];
+          }
+      } else {
+        return $login->error();
+      }
+    }
+  }
+}
+
+function checktoken($username, $token){
   return "not implemented";
 }
-//checkver("b1019");
+//checkver("b1020");
 ?>
