@@ -35,7 +35,6 @@ $dbuser = "";
 $dbpass = "";
 $dbname = "";
 
-// If you want to fix an issue, open the script on github.
 
 function checkver($ver){ // PLEASE FIX!
   if($ver != file_get_contents("https://raw.githubusercontent.com/TermOfficial/Term-Framework/main/framework-true.php")){
@@ -112,10 +111,10 @@ function login($username, $password){
   } else {
     $result = $login->get_result();
     $row = $result->fetch_assoc();
-    if($row["password"] != password_hash($password, PASSWORD_DEFAULT){
+    if($row["password"] != password_hash($password, PASSWORD_DEFAULT)){
       return "invalid password";
     } else {
-      $token = "DO NOT SHARE YOUR COOKIES TO ANYBODY. value: ".bin2hex(openssl_random_pseudo_bytes(64));."";
+      $token = "DO NOT SHARE YOUR COOKIES TO ANYBODY. value: ".bin2hex(openssl_random_pseudo_bytes(64))."";
       $login = $db->prepare("INSERT INTO token (uid, token) VALUES (?, ?)");
       $login->bind_param("is", $row["id"], $token);
       $login->execute();
@@ -125,7 +124,7 @@ function login($username, $password){
             setcookie("DO NOT GIVE YOUR COOKIES TO ANYBODY", "DO NOT GIVE YOUR COOKIES TO ANYBODY", time()+99999);
             setcookie("token", $token, time()+99999);
             setcookie("id", $row["id"], time()+99999);
-            setcookie("username" $row["username"], time()+99999);
+            setcookie("username", $row["username"], time()+99999);
           } else {
             global $_SESSION;
             // I would put a don't give your cookies to anybody here, but guess what? You can't read PHP Session IDs! :DDD But seriously. don't give your cookies to anybody.
@@ -143,5 +142,5 @@ function login($username, $password){
 function checktoken($username, $token){
   return "not implemented";
 }
-//checkver("b1020");
+//checkver("b1021");
 ?>
