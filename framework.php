@@ -7,7 +7,7 @@ Although before you can use this, I'd like to say a few things.
 2. If you encounter a problem, try solving it yourself! If you solve it, make a pull request to make life easier for other developers! (and me. D:) If you can't solve it, create an issue. (https://github.com/TermOfficial/Term-Framework)
 3. Enjoy!
 
-This script uses MySQLi, CURL.
+This script uses MySQLi, file_get_contents (you must be able to get contents from raw.githubusercontent.com with an https request header.)
 If you don't have the following, the script won't function.
 
 In order to connect to your database, you can use your own script by specifying it in config, but it needs one requirement. The database must be connected to under $db.
