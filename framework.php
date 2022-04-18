@@ -94,6 +94,11 @@ function setup(){
 
 function clogin($username, $password){
   global $db;
+  $duplicate = $db->prepare("SELECT `id` FROM `users` WHERE username = ?");
+  $duplicate->bind_param("s", $username);
+  $duplicate->execute();
+  $dres = $duplicate->get_result();
+  if($dres->num_rows == 0){
   $hash = password_hash($password, PASSWORD_BCRYPT);
   $makeacc = $db->prepare("INSERT INTO `users` (`id`, `username`, `password`) VALUES (NULL, ?, ?);");
   $makeacc->bind_param("ss", $username, $hash);
@@ -102,6 +107,9 @@ function clogin($username, $password){
     return $makeacc->error();
   } else {
     return 1;
+  }
+  } else {
+    return "alreadyexists";
   }
 }
 
