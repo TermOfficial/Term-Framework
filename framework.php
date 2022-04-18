@@ -95,7 +95,7 @@ function setup(){
 function clogin($username, $password){
   global $db;
   $hash = password_hash($password, PASSWORD_BCRYPT);
-  $makeacc = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+  $makeacc = $db->prepare("INSERT INTO `users` (`id`, `username`, `password`) VALUES (NULL, ?, ?);");
   $makeacc->bind_param("ss", $username, $hash);
   $makeacc->execute();
   if($makeacc->error){
