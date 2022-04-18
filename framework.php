@@ -76,7 +76,12 @@ function setup(){
       if(!$setup->error){
          echo "<br>tokens created";
          $setup = $db->prepare("CREATE TABLE `".$dbname."`.`bans` ( `uid` INT(10) NOT NULL ) ENGINE = MyISAM;");
+         $setup->execute();
+         if($setup->error){
+            return $setup->error();
+         } else {
          return 1;
+         }
       } else {
         echo "epic fail";
         return $setup->error();
@@ -89,7 +94,7 @@ function setup(){
 
 function clogin($username, $password){
   global $db;
-  $hash = password_hash($password, PASSWORD_DEFAULT);
+  $hash = password_hash($password, PASSWORD_BCRYPT);
   $makeacc = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
   $makeacc->bind_param("ss", $username, $hash);
   $makeacc->execute();
@@ -106,12 +111,12 @@ function login($username, $password){
   $login = $db->prepare("SELECT * FROM users WHERE username = ?");
   $login->bind_param("s", $username);
   $login->execute();
-  if($login->num_rows == 0){
+  $result = $login->get_result();
+  if($result->num_rows == 0){
     return "noaccount";
   } else {
-    $result = $login->get_result();
     $row = $result->fetch_assoc();
-    if($row["password"] != password_hash($password, PASSWORD_DEFAULT)){
+    if(!password_verify($password, $row["password"])){
       return "invalid password";
     } else {
       $token = "DO NOT SHARE YOUR COOKIES TO ANYBODY. value: ".bin2hex(openssl_random_pseudo_bytes(64))."";
@@ -141,8 +146,22 @@ function login($username, $password){
   }
 }
 
+function logout(){
+  global $usecookies;
+  if($usecookies){
+    setcookie('DO NOT GIVE YOUR COOKIES TO ANYBODY', null, -1); 
+    setcookie('token', null, -1); 
+    setcookie('id', null, -1);
+    setcookie('username', null, -1);
+    return 1;
+  } else {
+    session_destroy();
+    return 1;
+  }
+}
+
 function checktoken($username, $token){
   return "not implemented";
 }
-//checkver("b1023");
+//checkver("b1024");
 ?>
