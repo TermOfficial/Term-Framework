@@ -135,9 +135,9 @@ function login($username, $password){
           if($usecookies){
             global $_COOKIE;
             setcookie("DO NOT GIVE YOUR COOKIES TO ANYBODY", "DO NOT GIVE YOUR COOKIES TO ANYBODY", time()+99999);
-            setcookie("token", $token, time()+99999);
-            setcookie("id", $row["id"], time()+99999);
-            setcookie("username", $row["username"], time()+99999);
+            setcookie("token", $token, time()+99999, "/");
+            setcookie("id", $row["id"], time()+99999, "/");
+            setcookie("username", $row["username"], time()+99999, "/");
             return 1;
           } else {
             global $_SESSION;
@@ -158,9 +158,9 @@ function logout(){
   global $usecookies;
   if($usecookies){
     setcookie('DO NOT GIVE YOUR COOKIES TO ANYBODY', null, -1); 
-    setcookie('token', null, -1); 
-    setcookie('id', null, -1);
-    setcookie('username', null, -1);
+    setcookie('token', null, -1, '/'); 
+    setcookie('id', null, -1, '/');
+    setcookie('username', null, -1, '/');
     return 1;
   } else {
     session_destroy();
@@ -168,8 +168,9 @@ function logout(){
   }
 }
 
+
 function checktoken($username, $token){
   return "not implemented";
 }
-//checkver("b1024");
+//checkver("b1026");
 ?>
