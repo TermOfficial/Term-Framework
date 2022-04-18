@@ -78,6 +78,7 @@ function setup(){
          $setup = $db->prepare("CREATE TABLE `".$dbname."`.`bans` ( `uid` INT(10) NOT NULL ) ENGINE = MyISAM;");
          $setup->execute();
          if($setup->error){
+            echo "Failed, DB is probably already setup";
             return $setup->error();
          } else {
          return 1;
@@ -163,6 +164,7 @@ function logout(){
     setcookie('username', null, -1, '/');
     return 1;
   } else {
+    global $_SESSION;
     session_destroy();
     return 1;
   }
@@ -172,5 +174,5 @@ function logout(){
 function checktoken($username, $token){
   return "not implemented";
 }
-//checkver("b1026");
+//checkver("b1027");
 ?>
