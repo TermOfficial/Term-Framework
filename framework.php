@@ -1,4 +1,9 @@
 <?php
+// don't mess with below
+if(!$usecookies){
+    session_start();
+}
+// don't mess with the above
 /*
 Well hello there! :D
 Don't be scared, I'll be here to guide you along here.
@@ -51,9 +56,6 @@ if($connscript != NULL){
     $db = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
     if($db->error){
         exit("Connection failure.");
-    }
-    if($usecookies = false){
-        session_start();
     }
 }
 
