@@ -83,11 +83,11 @@ function setup(){
          return 1;
          }
       } else {
-        echo "epic fail";
+        echo "Failed, DB is probably already setup";
         return $setup->error();
       }
     } else {
-        echo "epic fail";
+        echo "Failed, DB is probably already setup";
         return $setup->error();
     }
 }
