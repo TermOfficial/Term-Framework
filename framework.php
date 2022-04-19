@@ -175,14 +175,23 @@ function logout(){
 function insertrow($table, $data, $value){
     $query = $db->prepare("INSERT INTO `".$table."` (".$data.") VALUES (".$value.")");
     $query->execute();
-    if(!$query->error){
+    if($query->error){
         return $query->error();
     } else {
         return 1;
     }
 }
 
-function
+function selectrow($table, $where){
+    $query = $db->prepare("SELECT * FROM `".$table."` WHERE ".$where."");
+    $query->execute();
+    if($query->error){
+        return $query->error();
+    } else {
+        $result = $query->get_result();
+        $row = $result->fetch_assoc();
+        return $row;
+}
 
 function checktoken($username, $token){
   return "not implemented";
