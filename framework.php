@@ -173,8 +173,16 @@ function logout(){
 }
 
 function insertrow($table, $data, $value){
-   $query = $db->prepare("INSERT INTO `".$table."` (".$data.") VALUES ();");
+    $query = $db->prepare("INSERT INTO `".$table."` (".$data.") VALUES (".$value.")");
+    $query->execute();
+    if(!$query->error){
+        return $query->error();
+    } else {
+        return 1;
+    }
 }
+
+function
 
 function checktoken($username, $token){
   return "not implemented";
