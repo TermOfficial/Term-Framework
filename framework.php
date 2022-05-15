@@ -191,6 +191,7 @@ function selectrow($table, $where){
         $result = $query->get_result();
         $row = $result->fetch_assoc();
         return $row;
+    }
 }
 
 function checktoken($username, $token){
