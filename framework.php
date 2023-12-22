@@ -8,7 +8,7 @@ if(!$usecookies){
 Well hello there! :D
 Don't be scared, I'll be here to guide you along here.
 Although before you can use this, I'd like to say a few things.
-1. You can use this framework FREE OF CHARGE! All you have to do is give credit for the script (per the MIT License) unless I give explicit permission.
+1. You can use this framework FREE OF CHARGE! There's no warranty or anything though so if you ask me for help on this, and i don't respond, sucks to suck
 2. If you encounter a problem, try solving it yourself! If you solve it, make a pull request to make life easier for other developers! (and me. D:) If you can't solve it, create an issue. (https://github.com/TermOfficial/Term-Framework)
 3. Enjoy!
 
