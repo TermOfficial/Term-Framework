@@ -1,3 +1,4 @@
+# This framework is unsupported, and will not recieve any updates at all. Maybe I'll make a new one.
 ### WARNING
 For some reason, the function that sets $_SESSION["_"] or $_COOKIE["_"] isn't working. - You'll have to set these values yourself. **How do I do this?**
 ### Luckily it's not that hard!
